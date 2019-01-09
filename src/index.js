@@ -1,16 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import _ from "lodash";
 
 import "./styles.css";
 
-function App() {
-  return (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
-    </div>
+function ClickyButton({ numberOfButton, onSelection }) {
+  const makeButton = v => (
+    <button key={v} value={v} onClick={event => onSelection(event.target.id)}>
+      v
+    </button>
   );
+  return <div>{_.range(1, numberOfButton + 1).map(makeButton)}</div>;
 }
 
 const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+ReactDOM.render(
+  <ClickyButton numberOfButton={99} onSelection={console.log} />,
+  rootElement
+);
